@@ -1,4 +1,25 @@
 let input;
+let computerScore = 0;
+let humanScore = 0;
+function scoreBoard(message, score){
+    let result = document.querySelector("#result");
+    let humanCounter = document.querySelector("#human");
+    let computerCounter = document.querySelector("#computer");
+    result.textContent = message;
+        switch(score){
+            case "human":
+                humanScore += 1;
+                humanCounter.textContent = humanScore.toString();
+                break;
+            case "computer":
+                computerScore += 1;
+                computerCounter.textContent = computerScore.toString();
+                break;
+            case "tie":
+                break;
+        }        
+    }
+
 const buttons = document.querySelectorAll("button");
 buttons.forEach((button) => {
     button.addEventListener("click", ()=> {
@@ -23,44 +44,46 @@ function getComputerChoice(){
         return "scissors";
     }
 }
-
-    function playRound(humanChoice, computerChoice){
-        let computerScore = 0;
-        let humanScore = 0;
+    
+function playRound(humanChoice, computerChoice){
         if(humanChoice === computerChoice){
-            console.log('It\'s a tie! Try again.');
+            scoreBoard('It\'s a tie! Try again.', "tie")
+            //console.log('It\'s a tie! Try again.');
         }
         else if(humanChoice === 'paper'){
             if(computerChoice === 'rock'){
-                console.log('Paper beats rock! +1 for humanity.');
-                humanScore++;
+                scoreBoard('Paper beats rock! +1 for humanity.', "human")
+                // console.log('Paper beats rock! +1 for humanity.');
+                // humanScore++;
             } else if(computerChoice === 'scissors') {
-                console.log('Scissors beats paper! +1 for the machines.')
-                computerScore++;
+                scoreBoard('Scissors beats paper! +1 for the machines.', "computer")
+                // console.log('Scissors beats paper! +1 for the machines.')
+                // computerScore++;
             }
         }
         else if(humanChoice === 'scissors'){
             if(computerChoice === 'paper'){
-                console.log('Scissors beats paper! +1 for humans.');
-                humanScore++;
+                scoreBoard('Scissors beats paper! +1 for humans.', "human")
+                // console.log('Scissors beats paper! +1 for humans.');
+                // humanScore++;
             } else if(computerChoice === 'rock'){
-                console.log('Rock smashes scissors. Bummer.');
-                computerScore++;
+                scoreBoard('Rock smashes scissors. Bummer.', "computer")
+                // console.log('Rock smashes scissors. Bummer.');
+                // computerScore++;
             }
         }
         else if(humanChoice === 'rock'){
             if(computerChoice === 'paper'){
-                console.log('Paper smothers rock. One more for the machines.');
-                computerScore++;
+                scoreBoard('Paper smothers rock. One more for the machines.', "computer")
+                // console.log('Paper smothers rock. One more for the machines.');
+                // computerScore++;
             } else if(computerChoice === 'scissors'){
-                console.log('Rock smashes scissors. Humanity triumphs!');
-                humanScore++;
+                scoreBoard('Rock smashes scissors. Humanity triumphs!', "human")
+                // console.log('Rock smashes scissors. Humanity triumphs!');
+                // humanScore++;
             }
         }
-        //scoreboard
-        let humanCounter = document.querySelector("#human");
-        humanCounter.textContent = humanScore.toString();
-        let computerCounter = document.querySelector("#computer");
-        computerCounter.textContent = computerScore.toString();
+    } 
 
-    }
+
+    
